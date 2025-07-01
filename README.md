@@ -1,10 +1,10 @@
-# 🛍️ Mini E-commerce Product Catalog
+## 🛍️ Mini E-commerce Product Catalog
 
 A full-stack e-commerce product catalog built with **React**, **Node.js**, **Express**, **MongoDB**, and deployed using **AWS/Firebase**.
 
 ## 🚀 Live Demo
-[Link to your deployed frontend (e.g., Firebase/Netlify)](https://your-app-link.com)  
-[Link to your backend API (e.g., EC2)](https://api.your-app-link.com)
+[Link to your deployed frontend (e.g., Firebase/Netlify)](URL_HERE)  
+[Link to your backend API (e.g., EC2)](URL_HERE)
 
 ---
 
@@ -16,8 +16,8 @@ A full-stack e-commerce product catalog built with **React**, **Node.js**, **Exp
 - Login & Register with JWT authentication
 
 ### 🛠 Admin
-- Create, update, delete products
-- Upload product images (stored on AWS S3 or Firebase Storage)
+- Create, update, delete products, category
+- Upload product and category images (stored on AWS S3 or Firebase Storage)
 - View user carts and stats (optional)
 
 ---
@@ -36,6 +36,7 @@ A full-stack e-commerce product catalog built with **React**, **Node.js**, **Exp
 ---
 
 ## 📁 Folder Structure
+```bash
 /backend
 ├── controllers/
 ├── routes/
@@ -50,6 +51,7 @@ A full-stack e-commerce product catalog built with **React**, **Node.js**, **Exp
 ├── pages/
 ├── services/
 └── App.jsx
+```
 
 
 ---
@@ -62,10 +64,14 @@ cd backend
 npm install
 # Create .env file with MONGO_URI, JWT_SECRET, AWS credentials
 npm start
+```
 
+### 🔌 Backend Setup
+```bash
 💻 Frontend Setup
 cd frontend
 npm install
 # Create .env file with VITE_API_URL
 npm run dev
+```
 
