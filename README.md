@@ -57,17 +57,15 @@ A full-stack e-commerce product catalog built with **React**, **Node.js**, **Exp
 ---
 ## ⚙️ Installation & Setup
 
-### 🔌 Backend Setup
+### 🔌 Backend and Frontend Setup
 
 ```bash
 cd backend
 npm install
 # Create .env file with MONGO_URI, JWT_SECRET, AWS credentials
 npm start
-```
 
-### 🔌 Backend Setup
-```bash
+
 💻 Frontend Setup
 cd frontend
 npm install
