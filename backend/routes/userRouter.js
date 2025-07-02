@@ -1,0 +1,12 @@
+const express = require("express")
+const router = express.Router()
+const {login, register, updateProfile} = require("../controllers/userController")
+const {validateUser,loginValidate} = require("../middleware/userValidation")
+const {auth} = require("../middleware/auth")
+
+
+router.post("/register",validateUser,register)
+router.post("/login", loginValidate, login)
+router.post("/updateprofile", auth, updateProfile)
+
+module.exports = router;
