@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/user", routes.userRouter)
-
+app.use("/api/category", routes.categoryRouter)
 
 
 // if PORT not found then run the app on 5000.
