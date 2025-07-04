@@ -3,8 +3,10 @@ const { addCategory,getAllCategory,deleteCategory,updateCategory } = require("..
 const router = express.Router();
 const upload = require("../middleware/upload");
 const { returnResponse } = require("../utils/response");
+const {auth, isNotAdmin} = require("../middleware/auth")
 
-router.post("/", (req, res, next) => {
+
+router.post("/", auth, isNotAdmin, (req, res, next) => {
     upload.single("catImage")(req, res, function (err) {
       if (err) {
         return returnResponse(res, 400, "Error to upload file: ", {}, err.message);
@@ -17,9 +19,9 @@ router.post("/", (req, res, next) => {
 
 router.get("/", getAllCategory)
 
-router.delete("/:id", deleteCategory)
+router.delete("/:id", auth, isNotAdmin, deleteCategory)
 
-router.patch("/:id", (req,res, next)=>{
+router.patch("/:id", auth, isNotAdmin, (req,res, next)=>{
     upload.single("catImage")(req,res,function(err){
         if(err){
             return returnResponse(res,400, err.message)

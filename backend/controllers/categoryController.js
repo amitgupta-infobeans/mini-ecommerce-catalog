@@ -9,7 +9,7 @@ const addCategory = async (req, res) => {
     const { catName, catDesc } = req.body;
 
     const image = req.file;
-    if (!image) return returnResponse(res, 400, "file not uploaded.");
+    if (!image) return returnResponse(res, 400, "Please provide file to upload..");
 
     const imageUrl = image.path;
     const cloudinaryId = image.filename;

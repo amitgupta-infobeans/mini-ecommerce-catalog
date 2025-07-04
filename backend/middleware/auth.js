@@ -1,17 +1,32 @@
 const jwt = require("jsonwebtoken");
+const { returnResponse } = require("../utils/response");
 
 const auth = async (req, res, next) => {
   try {
-    let token = req?.headers?.authorization;
+    let token = req?.headers?.token;
     if (!token)
-      return res.status(401).json({ message: "No token provided" });
+      return res.status(401).json({ message: "Unauthorized. No token provided" });
 
     let decodeToken = await jwt.verify(token, process.env.JSONWEB_TOKEN);
     req.user = decodeToken;
     next();
   } catch (e) {
-    res.status(400).json({ message: e.message });
+    returnResponse(res, 400, e.message);
   }
 };
 
-module.exports = { auth };
+
+const isNotAdmin = (req,res, next) =>{
+  try{
+    const {role} = req.user
+    if(role != "admin"){
+      return returnResponse(res, 401, "Unauthorized user to perform this action.")
+    }
+    next()
+  }catch(e){
+    return returnResponse(res, 400, e.message)
+  }
+  
+}
+
+module.exports = { auth,isNotAdmin };
