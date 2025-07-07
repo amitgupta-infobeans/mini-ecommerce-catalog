@@ -13,7 +13,7 @@ app.use(express.json());
 // Routes
 app.use("/api/user", routes.userRouter)
 app.use("/api/category", routes.categoryRouter)
-
+app.use("/api/product", routes.productRouter)
 
 // if PORT not found then run the app on 5000.
 const PORT = process.env.PORT || 5000;

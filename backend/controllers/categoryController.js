@@ -25,7 +25,7 @@ const addCategory = async (req, res) => {
       return returnResponse(res, 400, "Something went wrong to add category");
     returnResponse(res, 201, "Category added", data);
   } catch (e) {
-    returnResponse(res, 403, e.message);
+    returnResponse(res, 400, e.message);
   }
 };
 
@@ -33,6 +33,7 @@ const addCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
+    const {catName, catDesc} = req.body
     const categoryExist = await categoryModel.findById(id);
     if (!categoryExist)
       return returnResponse(res, 400, `No data found for category id = ${id}`);
@@ -45,8 +46,8 @@ const updateCategory = async (req, res) => {
       categoryExist.cloudinaryId = req.file.filename;
     }
 
-    categoryExist.catName = req.body.catName || categoryExist.catName;
-    categoryExist.catDesc = req.body.catDesc || categoryExist.catDesc;
+    categoryExist.catName = catName || categoryExist.catName;
+    categoryExist.catDesc = catDesc || categoryExist.catDesc;
 
     await categoryExist.save();
     return returnResponse(res, 200, "category updated.", categoryExist);

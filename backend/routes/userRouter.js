@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const {login, register, updateProfile} = require("../controllers/userController")
-const {validateUser,loginValidate} = require("../middleware/userValidation")
+const {validateUser,loginValidate} = require("../middleware/ValidateInputData")
 const {auth} = require("../middleware/auth")
 
 
