@@ -39,14 +39,13 @@ exports.validateProduct = [
     .withMessage("stock quantity is required.")
     .isNumeric()
     .withMessage("stock quantity should be numeric value."),
-  body("productImage").custom((value, {req})=>{
-      if(!req.file){
-        throw new Error("Product file is required field...")
-      }
-      return true
-  })
+  body("productImage").custom((value, { req }) => {
+    if (!req.file) {
+      throw new Error("Product file is required field...");
+    }
+    return true;
+  }),
 ];
-
 
 // Validate Edit Product.
 exports.validateEditProduct = [
@@ -60,5 +59,14 @@ exports.validateEditProduct = [
   body("stockQty")
     .notEmpty()
     .withMessage("stock quantity is required.")
-    .isNumeric()
+    .isNumeric(),
+];
+
+exports.validateRoleAndUserId = [
+  body("userId").notEmpty().withMessage("userId is required"),
+  body("role")
+    .notEmpty()
+    .withMessage("user role is required")
+    .isIn(["admin", "user", "manager"])
+    .withMessage("role must be either 'user' or 'admin'"),
 ];

@@ -1,7 +1,11 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const { returnResponse,validateRequest } = require("../utils/response");
+const { returnResponse, validateRequest } = require("../utils/response");
+const ms = require("ms");
+require("dotenv").config();
+
+const expiresIn = process.env.JWT_AND_COOKIE_EXPIRES_IN;
 
 // Register user.
 const register = async (req, res) => {
@@ -42,9 +46,14 @@ const login = async (req, res) => {
     let token = jwt.sign(
       { user_id: userData._id, role: userData.role },
       process.env.JSONWEB_TOKEN,
-      { expiresIn: `${process.env.JWT_EXPIRES_IN}` }
+      { expiresIn }
     );
-    userData.token = token;
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "strict",
+      maxAge: ms(expiresIn), //convert 1h into miliseconds of 1h
+    });
     return returnResponse(res, 200, "login success", userData);
   } catch (e) {
     return returnResponse(res, 400, e.message);
@@ -71,6 +80,23 @@ const updateProfile = async (req, res) => {
   }
 };
 
+const updateUserRole = async (req, res) => {
+  try {
+    let error = validateRequest(req);
+    const { role, userId } = req.body;
+    if (error.length)
+      return returnResponse(res, 400, "validation failed: ", {}, error);
+    await userModel.findByIdAndUpdate(userId, { role });
 
+    return returnResponse(res, 200, "user role Updated");
+  } catch (e) {
+    return returnResponse(res, 400, e.message);
+  }
+};
 
-module.exports = { register, login, updateProfile };
+const logout = (req, res) => {
+  res.clearCookie("token");
+  return returnResponse(res, 200, "Logout Successfully.");
+};
+
+module.exports = { register, login, updateProfile, updateUserRole, logout };

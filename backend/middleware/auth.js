@@ -3,7 +3,7 @@ const { returnResponse } = require("../utils/response");
 
 const auth = async (req, res, next) => {
   try {
-    let token = req?.headers?.token;
+    let token = req.cookies.token
     if (!token)
       return res.status(401).json({ message: "Unauthorized. No token provided" });
 
