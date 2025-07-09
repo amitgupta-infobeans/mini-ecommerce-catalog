@@ -1,3 +1,8 @@
+# Ignore node_modules anywhere in the repo
+**/node_modules/
+**/package-lock.json
 ./backend/node_modules
+./frontend/node_modules
 ./practice_node/node_modules
 node_modules/
+.vscode/

@@ -67,8 +67,12 @@ npm start
 
 
 💻 Frontend Setup
+
+npm create vite@latest frontend -- --template react
 cd frontend
 npm install
+npm i axios react-router-dom
+npm i tailwindcss @tailwindcss/vite
 # Create .env file with VITE_API_URL
 npm run dev
 ```

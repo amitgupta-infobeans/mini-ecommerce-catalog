@@ -5,7 +5,7 @@ const auth = async (req, res, next) => {
   try {
     let token = req.cookies.token
     if (!token)
-      return res.status(401).json({ message: "Unauthorized. No token provided" });
+      return  returnResponse(res, 401, "Unauthorized. No token provided");
 
     let decodeToken = await jwt.verify(token, process.env.JSONWEB_TOKEN);
     req.user = decodeToken;

@@ -32,7 +32,7 @@ const addProduct = async (req, res) => {
       cloudinaryId,
     });
 
-    return returnResponse(res, 200, "Okay", product);
+    return returnResponse(res, 200, "Product added successfully.", product);
   } catch (e) {
     return returnResponse(res, 400, e.message);
   }
@@ -105,7 +105,7 @@ const getProducts = async (req, res) => {
     } else {
       products = await productModel.find();
     }
-    return returnResponse(res, 200, "Okay", products);
+    return returnResponse(res, 200, "Product details fetched", products);
   } catch (e) {
     return returnResponse(res, 400, e.message);
   }

@@ -24,7 +24,7 @@ const register = async (req, res) => {
     const user = screatedUser.toObject(); // convert to plain object
     return returnResponse(res, 201, "User successfully register.");
   } catch (e) {
-    return returnResponse(res, 400, {}, e.message);
+    return returnResponse(res, 400, e.message);
   }
 };
 
@@ -37,9 +37,10 @@ const login = async (req, res) => {
     }
     const { email, password } = req.body;
     const user = await userModel.findOne({ email: email });
-    if (!user) return res.status(400).json({ message: "Invalid Email" });
+    
+    if (!user) return returnResponse(res, 400, "Invalid email provided for login."); 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid Password" });
+    if (!isMatch) returnResponse(res, 400, "Invalid password provided for login."); 
     let userData = user.toObject();
     delete userData.password;
     // add token in response..
