@@ -1,8 +1,7 @@
 const { returnResponse, validateRequest } = require("../utils/response");
 const productModel = require("../models/productModel");
 const mongoose = require("mongoose");
-const cloudinary  = require("../config/cloudinary");
-
+const cloudinary = require("../config/cloudinary");
 
 const addProduct = async (req, res) => {
   try {
@@ -69,7 +68,6 @@ const updateProduct = async (req, res) => {
 
     await existProduct.save();
     return returnResponse(res, 200, "updated successfully", existProduct);
-
   } catch (e) {
     return returnResponse(res, 400, e.message);
   }
@@ -98,6 +96,8 @@ const getProducts = async (req, res) => {
     const { id } = req.params;
     let products = [];
     if (id) {
+      if (!mongoose.Types.ObjectId.isValid(req.params))
+        return returnResponse(res, 400, "invalid product id format.");
       product = await productModel.findById(id);
       if (product) {
         products = [product];

@@ -13,7 +13,7 @@ export const useApiCall = () => {
         data,
         withCredentials: true,
       });
-      return { success: true, error: false, message: response?.data?.message, data: response?.data?.data };
+      return { success: true, message: response?.data?.message, data: response?.data?.data };
     } catch (e) {
       setLoading(false);
       if (e?.response?.data?.error?.length) {
@@ -22,11 +22,10 @@ export const useApiCall = () => {
           .join(",");
         let err = `${e.response.data.message}:\n ${validationErrors}`;
 
-        return { success: false, error: true, message: err, data: [] };
+        return { success: false, message: err, data: [] };
       } else {
         return {
           success: false,
-          error: true,
           message: e?.response?.data?.message,
           data: []
         };

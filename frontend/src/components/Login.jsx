@@ -18,7 +18,7 @@ const Login = () => {
       const baseURL = isRegister
         ? `${import.meta.env.VITE_API_URL}/user/register`
         : `${import.meta.env.VITE_API_URL}/user/login`;
-      const { success, error, message, data } = await callApi(baseURL, "POST", {
+      const { success, message, data } = await callApi(baseURL, "POST", {
         email,
         password,
         name,
@@ -32,9 +32,8 @@ const Login = () => {
           localStorage.setItem('user', JSON.stringify(data.name))
           navigate("/");
         }
-      }
-      if (error) {
-        error && toast.error(message);
+      } else {
+        toast.error(message);
       }
     } catch (e) {
       toast.error(e);

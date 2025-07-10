@@ -1,47 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useApiCall } from "../hooks/useApiCall";
 import { toast } from "react-toastify";
 import CategoryCard from "./CategoryCard";
+import { useApiHandler } from "../hooks/useApiHandler";
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [loading, callApi] = useApiCall();
+  const { data: category } = useApiHandler("category", "get");
+  const { message } = useApiHandler("user/logout", "get");
   const navigate = useNavigate();
-  const [category, setCategory] = useState([])
 
   const lsUser = JSON.parse(localStorage.getItem("user"));
-  const hasFetchedCategory = useRef(false)
 
   const logoutAction = async () => {
-    const baseURL = `${import.meta.env.VITE_API_URL}/user/logout`;
-    const { success, error, message, data } = await callApi(baseURL, "GET");
-    if (success) {
-      localStorage.removeItem("user");
-      // toast.success(message);
-      navigate("/login");
-    }
+   
+    localStorage.removeItem("user");
+    toast.success(message);
+    navigate("/login");
   };
-
-  const getAllCat = async () => {
-    const baseURL = `${import.meta.env.VITE_API_URL}/category`;
-    const { success, message, error, data } = await callApi(baseURL, "get")
-    if (success) {
-      // toast.success(message)
-      setCategory(data)
-    }
-  }
-
-  useEffect(() => {
-
-    if (!hasFetchedCategory.current) {
-      getAllCat()
-      hasFetchedCategory.current = true
-
-    }
-
-  }, [])
-
 
 
   return (
@@ -50,8 +27,10 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo + Site Name */}
           <div className="flex items-center cursor-pointer">
-            <img src="./trolly.svg" className="w-10 pt-1" alt="logo" />
-            <span className="font-bold text-lg ml-2">E-Commerce Mini</span>
+            <Link to="/">
+              <img src="trolly.svg" className="w-10 pt-1" alt="logo" />
+              <span className="font-bold text-lg ml-2">E-Commerce Mini</span>
+            </Link>
           </div>
 
           {/* Hamburger menu (small screens) */}
