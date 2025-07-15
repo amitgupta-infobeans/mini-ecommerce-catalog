@@ -11,7 +11,7 @@ const auth = async (req, res, next) => {
     req.user = decodeToken;
     next();
   } catch (e) {
-    returnResponse(res, 400, e.message);
+    return returnResponse(res, 400, e.message);
   }
 };
 

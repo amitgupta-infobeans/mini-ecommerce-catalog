@@ -40,7 +40,7 @@ const login = async (req, res) => {
     
     if (!user) return returnResponse(res, 400, "Invalid email provided for login."); 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) returnResponse(res, 400, "Invalid password provided for login."); 
+    if (!isMatch) return returnResponse(res, 400, "Invalid password provided for login."); 
     let userData = user.toObject();
     delete userData.password;
     // add token in response..

@@ -14,7 +14,7 @@ const Navbar = () => {
   const lsUser = JSON.parse(localStorage.getItem("user"));
 
   const logoutAction = async () => {
-   
+
     localStorage.removeItem("user");
     toast.success(message);
     navigate("/login");
@@ -27,9 +27,9 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo + Site Name */}
           <div className="flex items-center cursor-pointer">
-            <Link to="/">
-              <img src="trolly.svg" className="w-10 pt-1" alt="logo" />
-              <span className="font-bold text-lg ml-2">E-Commerce Mini</span>
+            <Link to="/" className="flex flex-col items-center justify-center">
+              <img src="trolly.svg" className="w-9" alt="logo" />
+              <span className="font-bold text-md">E-Commerce Mini</span>
             </Link>
           </div>
 
@@ -96,18 +96,10 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="sm:hidden mt-2 space-y-1">
-            <Link className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-900 hover:text-white">
-              Dashboard
-            </Link>
-            <Link className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-900 hover:text-white">
-              Team
-            </Link>
-            <Link className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-900 hover:text-white">
-              Projects
-            </Link>
-            <Link className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-900 hover:text-white">
-              Calendar
-            </Link>
+            {category.length && category.map((onecat) => {
+              return <CategoryCard key={onecat._id} onecat={onecat} />
+            })}
+
             <Link
               to={!lsUser && "/login"}
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-900 hover:text-white "
