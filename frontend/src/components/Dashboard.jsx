@@ -1,12 +1,12 @@
 import { useApiHandler } from "../hooks/useApiHandler";
+import Loader from "./Loader";
 import ProductCard from "./ProductCard";
 
 const Dashboard = () => {
-  const { data: products } = useApiHandler("product", "get");
+  const { data: products, loading } = useApiHandler("product", "get");
 
   return (
-    <div className=" ">
-      {/* Card */}
+    <> {loading && <Loader />}
       {products.length > 0 &&
 
         <div className="bg-neutral-500 text-white ">
@@ -30,7 +30,7 @@ const Dashboard = () => {
           </div>
         </div>
       }
-    </div>
+    </>
   );
 };
 

@@ -4,9 +4,11 @@ import { useState } from "react";
 export const useApiCall = () => {
   const [loading, setLoading] = useState(false);
 
-  const callApi = async (url, method, data = {}) => {
+  const callApi = async (url, method, data = {}, delay = 1000) => {
     try {
       setLoading(true);
+
+      await new Promise((resovle) => setTimeout(resovle, delay))
       const response = await axios({
         method,
         url,

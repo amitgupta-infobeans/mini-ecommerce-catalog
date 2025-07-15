@@ -1,13 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useApiHandler } from "../hooks/useApiHandler";
+import Loader from "./Loader";
 
 const ProductDetails = () => {
     const { id } = useParams();
-    const { data } = useApiHandler(`product/${id}`);
+    const { data, loading } = useApiHandler(`product/${id}`);
 
     return (
-        <>
+        <>{loading && <Loader />}
             {data.length > 0 && (
                 <div className="w-full flex items-center justify-center p-4">
                     <div className="bg-white border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-row max-w-4xl w-full">

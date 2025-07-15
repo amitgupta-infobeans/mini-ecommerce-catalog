@@ -34,7 +34,7 @@ export const useApiHandler = (endpoint, method, dataToSend = {}) => {
     }
   }, []);
 
-  return { message, data }
+  return { message, data, loading }
 
 }
 
