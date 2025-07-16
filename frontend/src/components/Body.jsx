@@ -4,11 +4,11 @@ import { Outlet } from "react-router-dom";
 
 const Body = () => {
   return (
-    <>
+     <div className="bg-black text-white ">
       <Navbar />
       <Outlet />
       {/* <Footer /> */}
-    </>
+    </div>
   );
 };
 

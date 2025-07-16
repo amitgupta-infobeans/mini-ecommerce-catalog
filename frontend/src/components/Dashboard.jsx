@@ -9,7 +9,7 @@ const Dashboard = () => {
     <> {loading && <Loader />}
       {products.length > 0 &&
 
-        <div className="bg-neutral-500 text-white ">
+        <div>
           <div className="mx-auto max-w-xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-6xl lg:px-8">
             <h2 className="sr-only">Products</h2>
 

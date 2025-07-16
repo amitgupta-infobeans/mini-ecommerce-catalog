@@ -4,7 +4,7 @@ import { useState } from "react";
 export const useApiCall = () => {
   const [loading, setLoading] = useState(false);
 
-  const callApi = async (url, method, data = {}, delay = 1000) => {
+  const callApi = async (url, method, data = {}, delay = 400) => {
     try {
       setLoading(true);
 
