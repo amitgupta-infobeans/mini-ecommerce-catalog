@@ -1,9 +1,21 @@
+import React, { useEffect } from "react";
 import { useApiHandler } from "../hooks/useApiHandler";
 import Loader from "./Loader";
 import ProductCard from "./ProductCard";
+import { useSelector, useDispatch } from "react-redux";
+import { setProduct } from "../slice/ProductSlice"
 
 const Dashboard = () => {
-  const { data: products, loading } = useApiHandler("product", "get");
+
+  const { products } = useSelector((store) => store.product)
+  const { data: apiData, loading } = useApiHandler("product", "get")
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (products.length === 0 && Array.isArray(apiData)) {
+      dispatch(setProduct(apiData))
+    }
+  }, [apiData, products.length, dispatch])
 
   return (
     <> {loading && <Loader />}

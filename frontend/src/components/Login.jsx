@@ -1,50 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import { useApiCall } from "../hooks/useApiCall";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Loader from "./Loader";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../slice/UserSlice";
+import { useLoginRegisterHandler } from "../hooks/useLoginRegisterHandler";
 
 const Login = () => {
-  const [isRegister, setIsRegister] = useState(false);
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, callApi] = useApiCall();
-  const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const user = useSelector((store) => store.user.user)
+  const [isRegister, setIsRegister] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      return navigate("/")
-    }
-  }, [user])
-
-  const handleData = async (e) => {
-    e.preventDefault();
-    try {
-      const baseURL = isRegister
-        ? `${import.meta.env.VITE_API_URL}/user/register`
-        : `${import.meta.env.VITE_API_URL}/user/login`;
-      const { success, message, data } = await callApi(baseURL, "POST", { email, password, name });
-      if (success) {
-        toast.success(message);
-        if (isRegister) {
-          setIsRegister(false);
-          navigate("/login");
-        } else {
-          dispatch(setUser(data))
-          navigate("/");
-        }
-      } else {
-        toast.error(message);
-      }
-    } catch (e) {
-      toast.error(e);
-    }
-  };
+  const { handleData, loading } = useLoginRegisterHandler(name, email, password, isRegister, setIsRegister)
 
   return (
     <>

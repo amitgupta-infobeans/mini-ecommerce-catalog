@@ -10,7 +10,7 @@ export const useApiHandler = (endpoint, method, dataToSend = {}) => {
 
   const handleData = async (e) => {
     try {
-      const baseURL = `${import.meta.env.VITE_API_URL}/${endpoint}`;      
+      const baseURL = `${import.meta.env.VITE_API_URL}/${endpoint}`;
       const { success, message, data } = await callApi(
         baseURL,
         method,
