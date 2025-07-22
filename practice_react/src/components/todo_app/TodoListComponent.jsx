@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import ToDoItems from './ToDoItems'
 import { CircularProgress, Modal, Box, Typography } from "@mui/material"
+import { Link } from 'react-router-dom'
 
 const TodoListComponent = () => {
 
@@ -70,7 +71,9 @@ const TodoListComponent = () => {
     return (
         <>
             {(loading) && <CircularProgress sx={{ display: "flex", justifyItems: "center", alignItems: "center", margin: "auto" }} disableShrink />}
+
             <div className='flex flex-col justify-start items-start md:w-[800px] sm:w-[300px] h-[500px] '>
+                <Link className='p-2 m-3 text-blue-500 underline' to="/">Back</Link>
                 {(todoList && todoList.length > 0) && todoList.map((oneItem) => {
                     return <ToDoItems oneItem={oneItem} key={oneItem.id} onEdit={onEdit} onDelete={onDelete} />
                 })}
@@ -98,8 +101,8 @@ const TodoListComponent = () => {
 
                     </Typography>
                     <Typography sx={{ mt: 2 }}>
-                        <button className='border bg-black p-2 text-white' onClick={updateOneTodo}>Update</button>
-                        <button className='border bg-black p-2 text-white' onClick={() => setIsModelOpen(!isModelOpen)}>Cancel</button>
+                        <button className='border bg-black px-2 py-1 cursor-pointer mr-2 text-white' onClick={updateOneTodo}>Update</button>
+                        <button className='border bg-black px-2 py-1 cursor-pointer text-white' onClick={() => setIsModelOpen(!isModelOpen)}>Cancel</button>
                     </Typography>
                 </Box>
             </Modal>}
