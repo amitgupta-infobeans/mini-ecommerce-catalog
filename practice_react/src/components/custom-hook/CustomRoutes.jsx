@@ -2,7 +2,9 @@ import TodoListComponent from "../todo_app/TodoListComponent"
 import ReactFormHook from "../react-hook-form/ReactFormHook"
 import { useRoutes } from 'react-router-dom'
 import NavBar from "../NavBar"
-import {UseFormStatusHook} from "../useFormStatus-hook/UseFormStatus"
+import { UseFormStatusHook } from "../useFormStatus-hook/UseFormStatus"
+import GetData from "../use-Memo-usecallBack/GetData"
+import UseCallBackExample from "../use-Memo-usecallBack/UseCallBackExample"
 
 const CustomRoutes = () => {
     const elements = useRoutes([
@@ -14,14 +16,22 @@ const CustomRoutes = () => {
                 element: <TodoListComponent />
             },
             {
-                path:"react-hook-form",
-                element:<ReactFormHook />
+                path: "react-hook-form",
+                element: <ReactFormHook />
             },
-             {
-                path:"use-form-status-hook",
-                element:<UseFormStatusHook />
+            {
+                path: "use-form-status-hook",
+                element: <UseFormStatusHook />
             },
-        ]
+            {
+                path: "use-memo",
+                element:<GetData />
+            },
+            {
+                path: "usecallback-hook",
+                element:<UseCallBackExample />
+            },
+            ]
         }
     ])
 
