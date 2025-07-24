@@ -5,6 +5,9 @@ import NavBar from "../NavBar"
 import { UseFormStatusHook } from "../useFormStatus-hook/UseFormStatus"
 import GetData from "../use-Memo-usecallBack/GetData"
 import UseCallBackExample from "../use-Memo-usecallBack/UseCallBackExample"
+import MyBlogSite from "../blogsite/MyBlogSite"
+
+
 
 const CustomRoutes = () => {
     const elements = useRoutes([
@@ -28,9 +31,14 @@ const CustomRoutes = () => {
                 element:<GetData />
             },
             {
-                path: "usecallback-hook",
+                path: "usecallback",
                 element:<UseCallBackExample />
             },
+                        {
+                path: "blog-site",
+                element:<MyBlogSite />
+            },
+
             ]
         }
     ])

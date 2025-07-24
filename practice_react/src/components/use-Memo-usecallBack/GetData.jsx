@@ -1,14 +1,13 @@
 import React from 'react'
 import { useFetch } from '../custom-hook/useFetch'
-import { CircularProgress } from "@mui/material"
 import { Link } from 'react-router-dom'
-
+import Loader from '../Loader'
 
 
 const GetData = () => {
     const { loading, data } = useFetch("https://dummyjson.com/posts")
 
-    return <> {(loading) && <CircularProgress sx={{ display: "flex", justifyItems: "center", alignItems: "center", margin: "auto" }} disableShrink />}
+    return <> {loading && <Loader />}
 
         <div className='flex flex-col justify-start items-start md:w-[800px] sm:w-[300px] h-[500px] '>
             <Link className='p-2 m-3 text-blue-500 underline' to="/">Back</Link>
