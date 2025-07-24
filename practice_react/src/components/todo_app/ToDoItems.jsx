@@ -3,7 +3,6 @@ import { Button } from "@mui/material"
 
 const ToDoItems = ({ oneItem, onEdit, onDelete }) => {
     const { todo: title, id, completed, } = oneItem;
-    console.log("ToDoItem...............")
     return (
         <div className='md:w-600px sm:w-full p-2 m-2 border bg-gray-200 flex justify-between items-center gap-2'>
             <div className=''>

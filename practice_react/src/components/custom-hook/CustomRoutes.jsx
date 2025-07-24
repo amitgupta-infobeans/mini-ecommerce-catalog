@@ -6,6 +6,7 @@ import { UseFormStatusHook } from "../useFormStatus-hook/UseFormStatus"
 import GetData from "../use-Memo-usecallBack/GetData"
 import UseCallBackExample from "../use-Memo-usecallBack/UseCallBackExample"
 import MyBlogSite from "../blogsite/MyBlogSite"
+import ReactQuery from "../react-query/ReactQuery"
 
 
 
@@ -28,15 +29,19 @@ const CustomRoutes = () => {
             },
             {
                 path: "use-memo",
-                element:<GetData />
+                element: <GetData />
             },
             {
                 path: "usecallback",
-                element:<UseCallBackExample />
+                element: <UseCallBackExample />
             },
-                        {
+            {
                 path: "blog-site",
-                element:<MyBlogSite />
+                element: <MyBlogSite />
+            },
+            {
+                path: "react-query-demo",
+                element: <ReactQuery />
             },
 
             ]

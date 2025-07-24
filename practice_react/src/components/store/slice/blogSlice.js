@@ -7,7 +7,7 @@ const initialBlog = localStorage.getItem("blog")
 const blogReducer = createSlice({
   name: "blogSite",
   initialState: {
-    blog: initialBlog.length > 0 ? initialBlog.reverse() : initialBlog,
+    blog: initialBlog,
     blogData: {
       title: "",
       description: "",
@@ -17,10 +17,7 @@ const blogReducer = createSlice({
   reducers: {
     addBlog: (state, action) => {
       let cpyData = { ...state.blogData, id: nanoid() };
-      state.blog.push(cpyData);
-      if (state.blog.length > 0) {
-        state.blog.reverse();
-      }
+      state.blog.unshift(cpyData); // Add to beginning
       localStorage.setItem("blog", JSON.stringify(state.blog));
     },
     removeBlog: (state, action) => {
@@ -45,12 +42,14 @@ const blogReducer = createSlice({
       let editedBlogIndex = cpyData.findIndex(
         (oneblog) => oneblog.id === state.currentEditBlog
       );
-      cpyData[editedBlogIndex] = {
-        ...cpyData[editedBlogIndex],
-        ...state.blogData,
-      };
-
-      state.blog = cpyData;
+      if (editedBlogIndex !== -1) {
+        cpyData[editedBlogIndex] = {
+          ...cpyData[editedBlogIndex],
+          ...state.blogData,
+        };
+        state.blog = cpyData;
+        localStorage.setItem("blog", JSON.stringify(state.blog));
+      }
     },
   },
 });

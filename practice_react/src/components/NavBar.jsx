@@ -12,6 +12,7 @@ const NavBar = () => {
                 <Link  className='bg-gray-300 px-2 py-1 hover:bg-gray-500 hover:text-white' to="/use-memo">useMemo</Link>
                 <Link  className='bg-gray-300 px-2 py-1 hover:bg-gray-500 hover:text-white' to="/usecallback">useCallback</Link>
                 <Link  className='bg-gray-300 px-2 py-1 hover:bg-gray-500 hover:text-white' to="/blog-site">BlogSite</Link>
+                <Link  className='bg-gray-300 px-2 py-1 hover:bg-gray-500 hover:text-white' to="/react-query-demo">ReactQuery</Link>
             </div>
             <Outlet />
         </>
